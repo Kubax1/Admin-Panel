@@ -5,9 +5,9 @@ WORKDIR /app
 COPY . .
 
 RUN chmod +x ./gradlew
-RUN ./gradlew clean bootJar -x test
+RUN ./gradlew clean bootJar -x test --no-daemon --stacktrace
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:25-jdk
 
 WORKDIR /app
 
