@@ -1,0 +1,10 @@
+@use "./variables.scss" as *;
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  color: white;
+  background-color: $gray-800;
+}

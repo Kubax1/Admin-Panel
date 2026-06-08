@@ -1,0 +1,46 @@
+@use '../../variables' as *;
+
+
+.dashboard {
+  display: flex;
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 50px;
+    margin-left: 4%;
+    width: 80%;
+  }
+
+  .content {
+    margin-top:150px;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: $gray-700;
+    padding: 20px;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    color: white;
+    flex: 1;
+    min-width: 220px;
+    min-height: 140px;
+    background-color: $gray-600;
+    border-color: $gray-500;
+  }
+  .value {
+    font-size: 45px;
+    font-weight: 700;
+    }
+  .chart {
+    width: 100%;
+  }
+}

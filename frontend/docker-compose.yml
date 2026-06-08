@@ -1,0 +1,27 @@
+services:
+  admin-panel:
+    image: node:22-alpine
+    container_name: admin-panel
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+
+  db:
+    image: postgres:16-alpine
+    container_name: admin-panel-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: admin_panel
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - admin_panel_db:/var/lib/postgresql/data
+
+volumes:
+  admin_panel_db:
