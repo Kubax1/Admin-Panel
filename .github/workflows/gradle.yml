@@ -1,0 +1,33 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Grant execute permission
+        working-directory: backend
+        run: chmod +x gradlew
+
+      - name: Run tests
+        working-directory: backend
+        run: ./gradlew test
+
+      - name: Build application
+        working-directory: backend
+        run: ./gradlew build
