@@ -10,6 +10,25 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: admin_panel
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U admin -d admin_panel"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    defaults:
+      run:
+        working-directory: backend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,15 +38,21 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: gradle
 
       - name: Grant execute permission
-        working-directory: backend
         run: chmod +x gradlew
 
       - name: Run tests
-        working-directory: backend
         run: ./gradlew test
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/admin_panel
+          SPRING_DATASOURCE_USERNAME: admin
+          SPRING_DATASOURCE_PASSWORD: admin
 
       - name: Build application
-        working-directory: backend
-        run: ./gradlew build
+        run: ./gradlew build -x test
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/admin_panel
+          SPRING_DATASOURCE_USERNAME: admin
+          SPRING_DATASOURCE_PASSWORD: admin
