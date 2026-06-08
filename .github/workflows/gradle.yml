@@ -21,12 +21,13 @@ jobs:
           java-version: 21
 
       - name: Grant execute permission
+        working-directory: backend
         run: chmod +x gradlew
 
       - name: Run tests
-        run: ./gradlew test
         working-directory: backend
+        run: ./gradlew test
 
       - name: Build application
-        run: ./gradlew build
         working-directory: backend
+        run: ./gradlew build
