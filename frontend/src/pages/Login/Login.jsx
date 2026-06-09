@@ -50,7 +50,7 @@ const Login = () => {
             <img src={logo} alt="logo" className="login-logo" />
             <Title order={2}>Admin Panel</Title>
             <Text c="dimmed" size="sm">
-              Sign in to manage your dashboard
+              Sign in to manage your dashboard 09.02
             </Text>
           </div>
 
